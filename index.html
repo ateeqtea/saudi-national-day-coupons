@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ateeq Tea — Saudi National Day Gift</title>
+<style>
+:root{--g:#0b6b3a;--g2:#0f8b4d;--d:#063b22;--c:#fffaf0;--m:#6e7f75}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(145deg,#064328,#0b6b3a 55%,#054025);font-family:Arial,sans-serif;color:#183024}.card{width:min(100%,460px);background:var(--c);border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.2)}header{padding:24px;text-align:center;background:linear-gradient(160deg,#0b6b3a,#07512d);color:#fff}.brand{font-weight:900;letter-spacing:.08em}.flag{font-size:42px;margin:8px}.national{font-size:13px;opacity:.84}.content{padding:25px;text-align:center}.hidden{display:none!important}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--g)}h1{font-size:30px;line-height:1.08;margin:8px 0;color:var(--d)}.arabic{direction:rtl;font-size:20px;font-weight:800;color:var(--g);margin-top:9px}.icon{width:126px;height:126px;margin:20px auto 16px;border-radius:28px;display:grid;place-items:center;font-size:62px;background:#eef8f1;border:1px solid #dcebe0}.warning{margin:22px 0 15px;padding:15px;background:#fff3cf;border:1px solid #efd384;border-radius:17px;color:#72540b;font-size:14px;line-height:1.45}.warning strong{display:block;color:#5f4405}.btn{width:100%;border:0;border-radius:16px;padding:16px 18px;background:linear-gradient(135deg,var(--g2),var(--g));color:white;font-size:17px;font-weight:900;cursor:pointer}.tiny{font-size:12px;color:var(--m);margin-top:12px}.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#e4f7eb;color:var(--g);font-weight:900;font-size:12px}.dot{width:10px;height:10px;border-radius:50%;background:#1fc16b;animation:p 1.3s infinite}@keyframes p{50%{opacity:.25}}.timer{font-size:54px;font-weight:950;color:var(--g);margin:18px 0 8px;font-variant-numeric:tabular-nums}.code{margin-top:18px;background:#073b23;color:white;border-radius:18px;padding:14px}.code b{display:block;font-size:31px;letter-spacing:.2em;margin-top:4px}.cashier{margin-top:16px;padding:14px;border:2px dashed rgba(11,107,58,.36);border-radius:15px;color:var(--g);font-weight:850}.modal{position:fixed;inset:0;background:rgba(3,25,14,.72);display:grid;place-items:center;padding:20px}.modalbox{width:min(100%,410px);background:white;border-radius:24px;padding:24px;text-align:center}.modalbox button{margin-top:10px}.secondary{background:#edf2ee;color:#183024}.status{font-size:68px}.spinner{width:42px;height:42px;border:4px solid #dbe6de;border-top-color:var(--g);border-radius:50%;animation:s .9s linear infinite;margin:24px auto}@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<main class="card">
+<header><div class="brand">ATEEQ TEA • عتيق</div><div class="flag">🇸🇦</div><div class="national">Saudi National Day 96 • اليوم الوطني السعودي ٩٦</div></header>
+<section id="loading" class="content"><div class="spinner"></div><div class="tiny">Opening your gift…</div></section>
+<section id="available" class="content hidden"><div class="eyebrow">You got a gift 🎁</div><h1 id="availablePrize"></h1><div id="availableArabic" class="arabic"></div><div id="availableIcon" class="icon">🎁</div><div class="warning"><strong>⚠️ Do not redeem until you are at the cashier.</strong>Pressing Redeem starts a <b>5-minute timer</b>. After 5 minutes, the reward expires and cannot be used again.<div dir="rtl" style="margin-top:7px">لا تضغط استبدال الجائزة إلا عند الكاشير. بعد الضغط لديك ٥ دقائق فقط.</div></div><button id="redeemBtn" class="btn">Redeem — Start 5 Minute Timer</button><div class="tiny">One-time use only.</div></section>
+<section id="active" class="content hidden"><div class="pill"><span class="dot"></span> LIVE REWARD</div><div id="activeIcon" class="icon">🎁</div><h1 id="activePrize"></h1><div id="activeArabic" class="arabic"></div><div class="tiny" style="margin-top:20px">EXPIRES IN</div><div id="timer" class="timer">05:00</div><div class="code"><small>LIVE CODE — CHANGES AUTOMATICALLY</small><b id="liveCode">----</b></div><div class="cashier">SHOW THIS LIVE SCREEN TO THE CASHIER<div dir="rtl" style="margin-top:5px">اعرض هذه الشاشة للكاشير</div></div></section>
+<section id="used" class="content hidden"><div class="status">❌</div><h1>Already Used</h1><div class="arabic">تم استخدام هذه الهدية مسبقاً</div></section>
+<section id="expired" class="content hidden"><div class="status">⌛</div><h1>Reward Expired</h1><div class="arabic">انتهت صلاحية الجائزة</div></section>
+<section id="invalid" class="content hidden"><div class="status">⚠️</div><h1>Invalid Coupon</h1><div class="arabic">رمز غير صالح</div></section>
+<section id="error" class="content hidden"><div class="status">📶</div><h1>Connection Problem</h1><button class="btn secondary" onclick="location.reload()">Try Again</button></section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modalbox"><div style="font-size:48px">⏱️</div><h2>Are you at the cashier?</h2><p>Once you continue, your <b>5-minute timer starts immediately</b> and this coupon becomes permanently used.</p><button id="confirmBtn" class="btn">Yes — Start My 5 Minutes</button><button id="cancelBtn" class="btn secondary">Not Yet</button></div></div>
+
+<script>
+const SUPABASE_URL="https://pbfaiyxqoomhqdkyaiax.supabase.co";
+const ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiZmFpeXhxb29taHFka3lhaWF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3NDAzMTIsImV4cCI6MjEwNTMxNjMxMn0.3Dm1sdVMY7OiEO9e6Kr1NSrr6IHtMZSfBTYM26uLF0E";
+const token=new URLSearchParams(location.search).get("c");
+const pages=["loading","available","active","used","expired","invalid","error"];
+const P={"Free Tea":["شاي مجاني","🍵"],"20% Off Order":["خصم ٢٠٪ على الطلب","🏷️"],"Buy One Get One Free":["اشترِ واحدًا واحصل على الآخر مجانًا","🎁"],"Free Tea or Cold Coffee":["شاي أو قهوة باردة مجانًا","🥤"],"Free Za'atar":["زعتر مجاني","🌿"],"50% Off Menu Item":["خصم ٥٠٪ على صنف واحد من القائمة","✨"]};
+const $=id=>document.getElementById(id); let exp=0,secret=null,t1,t2;
+function show(id){pages.forEach(x=>$(x).classList.add("hidden"));$(id).classList.remove("hidden")}
+function k(){return "ateeq:"+token} function hx(a){return Array.from(a).map(b=>b.toString(16).padStart(2,"0")).join("")}
+function mk(){let a=new Uint8Array(32);crypto.getRandomValues(a);return hx(a)}
+async function sha(s){return hx(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s))))}
+async function rpc(n,b){let r=await fetch(`${SUPABASE_URL}/rest/v1/rpc/${n}`,{method:"POST",headers:{apikey:ANON_KEY,Authorization:"Bearer "+ANON_KEY,"Content-Type":"application/json"},body:JSON.stringify(b)});if(!r.ok)throw 0;return r.json()}
+function prize(x,t){let p=P[x]||["هدية مجانية","🎁"];$(t+"Prize").textContent=x;$(t+"Arabic").textContent=p[0];$(t+"Icon").textContent=p[1]}
+async function load(){if(!token||!/^[a-f0-9]{36}$/i.test(token))return show("invalid");try{let s=localStorage.getItem(k()),h=s?await sha(s):null,d=await rpc("get_coupon",{p_token:token,p_claim_hash:h});if(d.state==="available"){prize(d.prize,"available");show("available")}else if(d.state==="active"&&s){start(d,s)}else if(d.state==="expired"){localStorage.removeItem(k());show("expired")}else if(d.state==="used"){show("used")}else show("invalid")}catch(e){show("error")}}
+$("redeemBtn").onclick=()=>$("modal").classList.remove("hidden");$("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
+$("confirmBtn").onclick=async()=>{try{let s=mk(),h=await sha(s);localStorage.setItem(k(),s);let d=await rpc("redeem_coupon",{p_token:token,p_claim_hash:h});$("modal").classList.add("hidden");if(d.state==="active")start(d,s);else if(d.state==="used")show("used");else if(d.state==="expired")show("expired");else show("invalid")}catch(e){localStorage.removeItem(k());show("error")}};
+function start(d,s){secret=s;exp=new Date(d.expires_at).getTime();prize(d.prize,"active");show("active");tick();code();clearInterval(t1);clearInterval(t2);t1=setInterval(tick,250);t2=setInterval(code,1000)}
+function tick(){let r=exp-Date.now();if(r<=0){clearInterval(t1);clearInterval(t2);localStorage.removeItem(k());return show("expired")}let z=Math.ceil(r/1000),m=Math.floor(z/60),s=z%60;$("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+async function code(){if(!secret)return;let h=await sha(secret+":"+Math.floor(Date.now()/7000));$("liveCode").textContent=String(parseInt(h.slice(0,8),16)%10000).padStart(4,"0")}
+load();
+</script>
+</body></html>
