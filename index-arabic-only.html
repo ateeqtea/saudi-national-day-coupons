@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>عتيق — هدية اليوم الوطني السعودي</title>
+<style>
+:root{--g:#0b6b3a;--g2:#0f8b4d;--d:#063b22;--c:#fffaf0;--m:#6e7f75}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(145deg,#064328,#0b6b3a 55%,#054025);font-family:Arial,sans-serif;color:#183024}
+.card{width:min(100%,460px);background:var(--c);border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.2)}
+header{padding:24px;text-align:center;background:linear-gradient(160deg,#0b6b3a,#07512d);color:#fff}
+.brand{font-weight:900;letter-spacing:.02em}
+.flag{font-size:42px;margin:8px}
+.national{font-size:13px;opacity:.84}
+.content{padding:25px;text-align:center}
+.hidden{display:none!important}
+.eyebrow{font-size:12px;letter-spacing:.04em;font-weight:800;color:var(--g)}
+h1{font-size:30px;line-height:1.15;margin:8px 0;color:var(--d)}
+.arabic{direction:rtl;font-size:20px;font-weight:800;color:var(--g);margin-top:9px}
+.icon{width:126px;height:126px;margin:20px auto 16px;border-radius:28px;display:grid;place-items:center;font-size:62px;background:#eef8f1;border:1px solid #dcebe0}
+.reward-photo{width:100%;max-width:260px;height:220px;object-fit:cover;border-radius:22px;display:block;margin:20px auto 16px;box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 10px;direction:ltr}
+.choice-card{border:2px solid #d9e6dc;border-radius:22px;background:#fff;padding:10px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.choice-card img{width:100%;height:140px;object-fit:cover;border-radius:16px;display:block}
+.choice-card .label{font-weight:800;font-size:13px;margin-top:9px;color:#264637}
+.choice-card.selected{transform:translateY(-8px) scale(1.03);border-color:var(--g);box-shadow:0 16px 30px rgba(11,107,58,.18)}
+.choice-card.selected .label{color:var(--g)}
+.choice-note{font-size:12px;color:var(--m);margin:6px 0 0}
+.selected-choice-badge{display:inline-block;margin-top:4px;padding:7px 12px;border-radius:999px;background:#e4f7eb;color:var(--g);font-size:12px;font-weight:800}
+.warning{margin:22px 0 15px;padding:15px;background:#fff3cf;border:1px solid #efd384;border-radius:17px;color:#72540b;font-size:14px;line-height:1.6}
+.warning strong{display:block;color:#5f4405}
+.btn{width:100%;border:0;border-radius:16px;padding:16px 18px;background:linear-gradient(135deg,var(--g2),var(--g));color:white;font-size:17px;font-weight:900;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.tiny{font-size:12px;color:var(--m);margin-top:12px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#e4f7eb;color:var(--g);font-weight:900;font-size:12px}
+.dot{width:10px;height:10px;border-radius:50%;background:#1fc16b;animation:p 1.3s infinite}
+@keyframes p{50%{opacity:.25}}
+.timer{font-size:54px;font-weight:950;color:var(--g);margin:18px 0 8px;font-variant-numeric:tabular-nums;direction:ltr}
+.code{margin-top:18px;background:#073b23;color:white;border-radius:18px;padding:14px}
+.code b{display:block;font-size:31px;letter-spacing:.2em;margin-top:4px;direction:ltr}
+.cashier{margin-top:16px;padding:14px;border:2px dashed rgba(11,107,58,.36);border-radius:15px;color:var(--g);font-weight:850;line-height:1.6}
+.modal{position:fixed;inset:0;background:rgba(3,25,14,.72);display:grid;place-items:center;padding:20px}
+.modalbox{width:min(100%,410px);background:white;border-radius:24px;padding:24px;text-align:center}
+.modalbox button{margin-top:10px}
+.secondary{background:#edf2ee;color:#183024}
+.status{font-size:68px}
+.spinner{width:42px;height:42px;border:4px solid #dbe6de;border-top-color:var(--g);border-radius:50%;animation:s .9s linear infinite;margin:24px auto}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<main class="card">
+<header>
+  <div class="brand">عتيق</div>
+  <div class="flag">🇸🇦</div>
+  <div class="national">اليوم الوطني السعودي ٩٦</div>
+</header>
+
+<section id="loading" class="content">
+  <div class="spinner"></div>
+  <div class="tiny">جاري فتح الهدية...</div>
+</section>
+
+<section id="available" class="content hidden">
+  <div class="eyebrow">لديك هدية 🎁</div>
+  <h1 id="availablePrize"></h1>
+  <div id="availableSelectedBadge" class="selected-choice-badge hidden"></div>
+  <div id="availableMedia"></div>
+  <div id="availableChoiceNote" class="choice-note hidden">اختر أحد الخيارين.</div>
+
+  <div class="warning">
+    <strong>⚠️ لا تضغط على استبدال إلا عند الكاشير.</strong>
+    بمجرد الضغط على زر الاستبدال يبدأ مؤقت لمدة <b>٥ دقائق</b>، وبعدها تنتهي صلاحية الجائزة ولا يمكن استخدامها مرة أخرى.
+  </div>
+
+  <button id="redeemBtn" class="btn">استبدال — بدء مؤقت ٥ دقائق</button>
+  <div class="tiny">استخدام لمرة واحدة فقط.</div>
+</section>
+
+<section id="active" class="content hidden">
+  <div class="pill"><span class="dot"></span> الجائزة مفعلة الآن</div>
+  <div id="activeMedia"></div>
+  <h1 id="activePrize"></h1>
+  <div id="activeSelectedBadge" class="selected-choice-badge hidden"></div>
+  <div class="tiny" style="margin-top:20px">الوقت المتبقي</div>
+  <div id="timer" class="timer">05:00</div>
+  <div class="code"><small>رمز متغير تلقائيًا</small><b id="liveCode">----</b></div>
+  <div class="cashier">اعرض هذه الشاشة للكاشير</div>
+</section>
+
+<section id="used" class="content hidden"><div class="status">❌</div><h1>تم استخدام الجائزة مسبقًا</h1></section>
+<section id="expired" class="content hidden"><div class="status">⌛</div><h1>انتهت صلاحية الجائزة</h1></section>
+<section id="invalid" class="content hidden"><div class="status">⚠️</div><h1>رمز غير صالح</h1></section>
+<section id="error" class="content hidden"><div class="status">📶</div><h1>مشكلة في الاتصال</h1><button class="btn secondary" onclick="location.reload()">إعادة المحاولة</button></section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modalbox">
+    <div style="font-size:48px">⏱️</div>
+    <h2>هل أنت عند الكاشير؟</h2>
+    <p>عند المتابعة سيبدأ مؤقت <b>٥ دقائق</b> فورًا، وستُعتبر هذه القسيمة مستخدمة بشكل نهائي.</p>
+    <button id="confirmBtn" class="btn">نعم — ابدأ الآن</button>
+    <button id="cancelBtn" class="btn secondary">ليس الآن</button>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL="https://pbfaiyxqoomhqdkyaiax.supabase.co";
+const ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiZmFpeXhxb29taHFka3lhaWF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3NDAzMTIsImV4cCI6MjEwNTMxNjMxMn0.3Dm1sdVMY7OiEO9e6Kr1NSrr6IHtMZSfBTYM26uLF0E";
+const token=new URLSearchParams(location.search).get("c");
+const pages=["loading","available","active","used","expired","invalid","error"];
+const P={
+  "Free Tea":{title:"شاي مجاني",image:"free-tea.jpeg"},
+  "20% Off Order":{title:"خصم ٢٠٪ على الطلب",icon:"🏷️"},
+  "Buy One Get One Free":{title:"اشترِ واحدًا واحصل على الآخر مجانًا",icon:"🎁"},
+  "Free Tea or Cold Coffee":{title:"شاي أو قهوة باردة مجانًا",choices:[
+    {value:"Free Tea",label:"شاي",image:"free-tea.jpeg"},
+    {value:"Cold Coffee",label:"قهوة باردة",image:"cold-coffee.jpeg"}
+  ]},
+  "Free Za'atar":{title:"زعتر مجاني",image:"free-zaatar.jpeg"},
+  "50% Off Menu Item":{title:"خصم ٥٠٪ على صنف واحد من القائمة",icon:"✨"}
+};
+const $=id=>document.getElementById(id); let exp=0,secret=null,t1,t2,currentPrize=null;
+function show(id){pages.forEach(x=>$(x).classList.add("hidden"));$(id).classList.remove("hidden")}
+function k(){return "ateeq:"+token}
+function choiceKey(){return "ateeq-choice:"+token}
+function hx(a){return Array.from(a).map(b=>b.toString(16).padStart(2,"0")).join("")}
+function mk(){let a=new Uint8Array(32);crypto.getRandomValues(a);return hx(a)}
+async function sha(s){return hx(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s))))}
+async function rpc(n,b){let r=await fetch(`${SUPABASE_URL}/rest/v1/rpc/${n}`,{method:"POST",headers:{apikey:ANON_KEY,Authorization:"Bearer "+ANON_KEY,"Content-Type":"application/json"},body:JSON.stringify(b)});if(!r.ok)throw 0;return r.json()}
+function selectedChoice(){return localStorage.getItem(choiceKey())}
+function setSelectedChoice(v){localStorage.setItem(choiceKey(),v)}
+function clearEl(el){el.innerHTML=""}
+
+function createIcon(icon){
+  const d=document.createElement("div");
+  d.className="icon";
+  d.textContent=icon||"🎁";
+  return d;
+}
+function createImage(src, alt){
+  const img=document.createElement("img");
+  img.src=src;
+  img.alt=alt;
+  img.className="reward-photo";
+  return img;
+}
+function updateChoiceBadges(prize, target){
+  const badge=$(target+"SelectedBadge");
+  if(prize!=="Free Tea or Cold Coffee"){badge.classList.add("hidden"); badge.textContent=""; return;}
+  const choice=selectedChoice();
+  if(choice){
+    const label = choice==="Cold Coffee" ? "قهوة باردة" : "شاي";
+    badge.textContent="تم الاختيار: " + label;
+    badge.classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+    badge.textContent="";
+  }
+}
+function renderMedia(prize,target){
+  const info=P[prize]||{title:"هدية مجانية",icon:"🎁"};
+  const media=$(target+"Media");
+  clearEl(media);
+
+  if(prize==="Free Tea or Cold Coffee"){
+    if(target==="available"){
+      const grid=document.createElement("div");
+      grid.className="choice-grid";
+      const choiceNote=$("availableChoiceNote");
+      choiceNote.classList.remove("hidden");
+      const current=selectedChoice();
+      info.choices.forEach(ch=>{
+        const card=document.createElement("div");
+        card.className="choice-card"+(current===ch.value?" selected":"");
+        card.innerHTML=`<img src="${ch.image}" alt="${ch.label}"><div class="label">${ch.label}</div>`;
+        card.addEventListener("click", ()=>{
+          setSelectedChoice(ch.value);
+          renderMedia(prize,"available");
+          updateRedeemButton();
+        });
+        grid.appendChild(card);
+      });
+      media.appendChild(grid);
+    } else {
+      $("availableChoiceNote").classList.add("hidden");
+      const current=selectedChoice() || "Free Tea";
+      const chosen=info.choices.find(x=>x.value===current) || info.choices[0];
+      media.appendChild(createImage(chosen.image, chosen.label));
+    }
+  } else {
+    $("availableChoiceNote").classList.add("hidden");
+    if(info.image) media.appendChild(createImage(info.image, info.title));
+    else media.appendChild(createIcon(info.icon));
+  }
+  updateChoiceBadges(prize,target);
+}
+function updateRedeemButton(){
+  const btn=$("redeemBtn");
+  if(currentPrize==="Free Tea or Cold Coffee" && !selectedChoice()){
+    btn.disabled=true;
+    btn.textContent="اختر شاي أو قهوة باردة أولًا";
+  } else {
+    btn.disabled=false;
+    btn.textContent="استبدال — بدء مؤقت ٥ دقائق";
+  }
+}
+function prize(x,t){
+  currentPrize=x;
+  const p=P[x]||{title:"هدية مجانية",icon:"🎁"};
+  $(t+"Prize").textContent=p.title;
+  renderMedia(x,t);
+  if(t==="available") updateRedeemButton();
+}
+async function load(){
+  if(!token||!/^[a-f0-9]{36}$/i.test(token))return show("invalid");
+  try{
+    let s=localStorage.getItem(k()),h=s?await sha(s):null,d=await rpc("get_coupon",{p_token:token,p_claim_hash:h});
+    if(d.state==="available"){prize(d.prize,"available");show("available")}
+    else if(d.state==="active"&&s){start(d,s)}
+    else if(d.state==="expired"){localStorage.removeItem(k());show("expired")}
+    else if(d.state==="used"){show("used")}
+    else show("invalid")
+  }catch(e){show("error")}
+}
+$("redeemBtn").onclick=()=>{$("modal").classList.remove("hidden")}
+$("cancelBtn").onclick=()=>{$("modal").classList.add("hidden")}
+$("confirmBtn").onclick=async()=>{
+  try{
+    let s=mk(),h=await sha(s);
+    localStorage.setItem(k(),s);
+    let d=await rpc("redeem_coupon",{p_token:token,p_claim_hash:h});
+    $("modal").classList.add("hidden");
+    if(d.state==="active")start(d,s);
+    else if(d.state==="used")show("used");
+    else if(d.state==="expired")show("expired");
+    else show("invalid")
+  }catch(e){
+    localStorage.removeItem(k());
+    show("error")
+  }
+};
+function start(d,s){
+  secret=s; exp=new Date(d.expires_at).getTime();
+  prize(d.prize,"active");
+  show("active");
+  tick(); code(); clearInterval(t1); clearInterval(t2);
+  t1=setInterval(tick,250); t2=setInterval(code,1000)
+}
+function tick(){
+  let r=exp-Date.now();
+  if(r<=0){clearInterval(t1); clearInterval(t2); localStorage.removeItem(k()); return show("expired")}
+  let z=Math.ceil(r/1000),m=Math.floor(z/60),s=z%60;
+  $("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")
+}
+async function code(){
+  if(!secret)return;
+  let h=await sha(secret+":"+Math.floor(Date.now()/7000));
+  $("liveCode").textContent=String(parseInt(h.slice(0,8),16)%10000).padStart(4,"0")
+}
+load();
+</script>
+</body>
+</html>
