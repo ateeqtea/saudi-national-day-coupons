@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#006c35">
+<title>عتيق | هدية اليوم الوطني</title>
+<style>
+:root{
+  --saudi:#006c35;
+  --saudi-dark:#004d27;
+  --cream:#fffaf0;
+  --ink:#153524;
+  --muted:#6f8176;
+  --gold:#d9ad45;
+  --warning-bg:#fff4cf;
+  --warning-border:#efd37e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.10),transparent 30%),
+    linear-gradient(145deg,#004b27,#00733a 52%,#003e20);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+  color:var(--ink);
+  overflow-x:hidden;
+}
+.card{
+  width:min(100%,470px);
+  background:var(--cream);
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.24);
+}
+.hero{
+  position:relative;
+  padding:18px 18px 24px;
+  text-align:center;
+  color:white;
+  background:linear-gradient(160deg,#007b3d,#005a2d);
+  overflow:hidden;
+}
+.hero:before,.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.055);
+}
+.hero:before{top:-100px;right:-60px}
+.hero:after{bottom:-120px;left:-70px}
+.flag-panel{
+  position:relative;
+  z-index:1;
+  min-height:205px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  border-radius:24px;
+  background:linear-gradient(180deg,#087f40,#006c35);
+  border:4px solid rgba(255,255,255,.30);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.13),0 12px 28px rgba(0,0,0,.20);
+}
+.flag-emoji{
+  font-size:104px;
+  line-height:1;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.20));
+  transform:translateY(2px);
+}
+.flag-title{font-size:23px;font-weight:950;margin-top:8px}
+.flag-sub{font-size:14px;font-weight:700;opacity:.92;margin-top:5px}
+.brand{position:relative;z-index:1;font-size:23px;font-weight:950;margin-top:15px}
+.national{position:relative;z-index:1;font-size:14px;opacity:.9;margin-top:5px}
+.content{padding:27px;text-align:center}
+.hidden{display:none!important}
+.spinner{
+  width:46px;height:46px;margin:28px auto 14px;
+  border:4px solid #dce9e0;border-top-color:var(--saudi);
+  border-radius:50%;animation:spin .85s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eyebrow{font-size:15px;font-weight:900;color:var(--saudi);margin-bottom:5px}
+h1{font-size:31px;line-height:1.25;margin:8px 0;color:var(--saudi-dark)}
+.reward-icon{
+  width:132px;height:132px;margin:19px auto 16px;
+  display:grid;place-items:center;
+  border-radius:30px;
+  font-size:66px;
+  background:linear-gradient(145deg,#f3fbf5,#e7f5eb);
+  border:1px solid #d8eadf;
+  box-shadow:0 10px 26px rgba(0,108,53,.10);
+}
+.warning{
+  margin:23px 0 15px;
+  padding:16px;
+  border-radius:18px;
+  background:var(--warning-bg);
+  border:1px solid var(--warning-border);
+  color:#6b500b;
+  font-size:14px;
+  line-height:1.8;
+}
+.warning strong{display:block;color:#594006;font-size:15px;margin-bottom:2px}
+.btn{
+  width:100%;border:0;border-radius:17px;
+  padding:16px 18px;
+  font:inherit;font-size:17px;font-weight:950;
+  cursor:pointer;
+  color:white;
+  background:linear-gradient(135deg,#0d8a49,var(--saudi));
+  box-shadow:0 10px 24px rgba(0,108,53,.20);
+}
+.btn:disabled{opacity:.60;cursor:wait}
+.btn.secondary{background:#edf2ee;color:var(--ink);box-shadow:none}
+.tiny{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+.live-pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 14px;border-radius:999px;
+  background:#e4f7eb;color:var(--saudi);
+  font-size:13px;font-weight:950;
+}
+.live-dot{width:11px;height:11px;border-radius:50%;background:#1cc269;box-shadow:0 0 0 0 rgba(28,194,105,.55);animation:pulse 1.45s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(28,194,105,.55)}70%{box-shadow:0 0 0 10px rgba(28,194,105,0)}100%{box-shadow:0 0 0 0 rgba(28,194,105,0)}}
+.timer-label{font-size:12px;color:var(--muted);margin-top:20px}
+.timer{font-size:58px;font-weight:950;color:var(--saudi);margin:6px 0 10px;direction:ltr;font-variant-numeric:tabular-nums}
+.live-code{
+  margin-top:16px;
+  padding:15px;
+  border-radius:19px;
+  background:#063d22;
+  color:white;
+}
+.live-code small{display:block;font-size:11px;opacity:.8;font-weight:700}
+.live-code b{display:block;margin-top:4px;font-size:34px;letter-spacing:.22em;direction:ltr;font-variant-numeric:tabular-nums}
+.cashier-box{
+  margin-top:16px;padding:15px;
+  border:2px dashed rgba(0,108,53,.35);
+  border-radius:17px;
+  color:var(--saudi);
+  font-size:15px;font-weight:950;
+}
+.status-icon{font-size:70px;margin:2px 0 8px}
+.modal{
+  position:fixed;inset:0;z-index:200;
+  display:grid;place-items:center;
+  padding:20px;
+  background:rgba(2,25,13,.78);
+  backdrop-filter:blur(4px);
+}
+.modal-box{
+  width:min(100%,410px);
+  padding:25px;
+  border-radius:25px;
+  background:white;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+.modal-box h2{margin:8px 0;font-size:24px;color:var(--saudi-dark)}
+.modal-box p{line-height:1.75;color:#53675b;font-size:14px}
+.modal-box .btn{margin-top:10px}
+#confetti-layer{
+  position:fixed;inset:0;z-index:500;
+  pointer-events:none;overflow:hidden;
+}
+.confetti{
+  position:absolute;top:-24px;
+  width:10px;height:18px;
+  border-radius:2px;
+  opacity:.96;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:1}
+  100%{transform:translate3d(var(--drift),115vh,0) rotate(900deg);opacity:0}
+}
+.celebrate-pop{animation:rewardPop .55s cubic-bezier(.17,.84,.44,1.35)}
+@keyframes rewardPop{0%{transform:scale(.78);opacity:.2}100%{transform:scale(1);opacity:1}}
+@media (max-width:420px){
+  body{padding:12px}.content{padding:22px}.flag-panel{min-height:190px}.flag-emoji{font-size:92px}h1{font-size:28px}.reward-icon{width:118px;height:118px;font-size:60px}.timer{font-size:52px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div id="confetti-layer" aria-hidden="true"></div>
+
+<main class="card">
+  <header class="hero">
+    <div class="flag-panel">
+      <div class="flag-emoji" aria-label="علم المملكة العربية السعودية">🇸🇦</div>
+      <div class="flag-title">اليوم الوطني السعودي ٩٦</div>
+      <div class="flag-sub">هدية خاصة من عتيق</div>
+    </div>
+    <div class="brand">عتيق</div>
+    <div class="national">كل عام والوطن بخير 🇸🇦</div>
+  </header>
+
+  <section id="loading" class="content">
+    <div class="spinner"></div>
+    <div class="tiny">جاري فتح هديتك...</div>
+  </section>
+
+  <section id="available" class="content hidden">
+    <div class="eyebrow">🎉 مبروك! ربحت هدية</div>
+    <div id="availableIcon" class="reward-icon">🎁</div>
+    <h1 id="availablePrize">هدية</h1>
+    <div class="warning">
+      <strong>⚠️ لا تضغط على «استبدال» إلا عند الكاشير.</strong>
+      بمجرد الضغط يبدأ مؤقت لمدة <b>٥ دقائق</b>. بعد انتهاء الوقت تصبح الجائزة منتهية ولا يمكن استخدامها مرة أخرى.
+    </div>
+    <button id="redeemBtn" class="btn">استبدال الجائزة — بدء ٥ دقائق</button>
+    <div class="tiny">الجائزة صالحة للاستخدام مرة واحدة فقط.</div>
+  </section>
+
+  <section id="active" class="content hidden">
+    <div class="live-pill"><span class="live-dot"></span> الجائزة مفعّلة الآن</div>
+    <div id="activeIcon" class="reward-icon">🎁</div>
+    <h1 id="activePrize">هدية</h1>
+    <div class="timer-label">الوقت المتبقي</div>
+    <div id="timer" class="timer">05:00</div>
+    <div class="live-code">
+      <small>رمز مباشر — يتغيّر تلقائيًا</small>
+      <b id="liveCode">----</b>
+    </div>
+    <div class="cashier-box">اعرض هذه الشاشة المباشرة للكاشير</div>
+  </section>
+
+  <section id="used" class="content hidden">
+    <div class="status-icon">❌</div>
+    <h1>تم استخدام الجائزة مسبقًا</h1>
+    <div class="tiny">هذه القسيمة غير صالحة للاستخدام مرة أخرى.</div>
+  </section>
+
+  <section id="expired" class="content hidden">
+    <div class="status-icon">⌛</div>
+    <h1>انتهت صلاحية الجائزة</h1>
+    <div class="tiny">انتهت مدة الاستبدال البالغة ٥ دقائق.</div>
+  </section>
+
+  <section id="invalid" class="content hidden">
+    <div class="status-icon">⚠️</div>
+    <h1>رمز غير صالح</h1>
+  </section>
+
+  <section id="error" class="content hidden">
+    <div class="status-icon">📶</div>
+    <h1>مشكلة في الاتصال</h1>
+    <button class="btn secondary" onclick="location.reload()">إعادة المحاولة</button>
+  </section>
+</main>
+
+<div id="confirmModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="modal-box">
+    <div style="font-size:52px">⏱️</div>
+    <h2 id="confirmTitle">هل أنت عند الكاشير؟</h2>
+    <p>بعد المتابعة سيبدأ مؤقت <b>٥ دقائق</b> فورًا، وستُعتبر القسيمة مستخدمة ولن يمكن تشغيلها من جهاز آخر.</p>
+    <button id="confirmBtn" class="btn">نعم، ابدأ الآن</button>
+    <button id="cancelBtn" class="btn secondary">ليس الآن</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const SUPABASE_URL = "https://pbfaiyxqoomhqdkyaiax.supabase.co";
+  const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiZmFpeXhxb29taHFka3lhaWF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3NDAzMTIsImV4cCI6MjEwNTMxNjMxMn0.3Dm1sdVMY7OiEO9e6Kr1NSrr6IHtMZSfBTYM26uLF0E";
+  const token = new URLSearchParams(location.search).get("c");
+  const pageIds = ["loading","available","active","used","expired","invalid","error"];
+
+  const rewards = {
+    "كوب شاي صغير": { title: "كوب شاي صغير", icon: "🍵" },
+    "كوب قهوة اليوم صغير": { title: "كوب قهوة اليوم صغير", icon: "☕" },
+    "كوب كركديه صغير": { title: "كوب كركديه صغير", icon: "🌺" },
+    "كوب شاهي بارد صغير": { title: "كوب شاهي بارد صغير", icon: "🥤" },
+    "خصم ٢٠٪؜ على اي فطيرة": { title: "خصم ٢٠٪؜ على أي فطيرة", icon: "🫓" }
+  };
+
+  const $ = id => document.getElementById(id);
+  let expiresAt = 0;
+  let claimSecret = null;
+  let timerInterval = null;
+  let codeInterval = null;
+  let redeeming = false;
+
+  const claimKey = () => `ateeq:claim:${token}`;
+  const celebrationKey = () => `ateeq:celebrated:${token}`;
+
+  function show(id) {
+    pageIds.forEach(x => $(x).classList.add("hidden"));
+    $(id).classList.remove("hidden");
+  }
+
+  function hex(bytes) {
+    return Array.from(bytes, b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function randomSecret() {
+    const bytes = new Uint8Array(32);
+    crypto.getRandomValues(bytes);
+    return hex(bytes);
+  }
+
+  async function sha256(value) {
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+    return hex(new Uint8Array(digest));
+  }
+
+  async function rpc(name, body) {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
+      method: "POST",
+      headers: {
+        apikey: ANON_KEY,
+        Authorization: `Bearer ${ANON_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    });
+    if (!response.ok) throw new Error(`RPC ${name} failed: ${response.status}`);
+    return response.json();
+  }
+
+  function rewardInfo(prize) {
+    return rewards[prize] || { title: prize || "هدية", icon: "🎁" };
+  }
+
+  function renderReward(prize, target) {
+    const info = rewardInfo(prize);
+    $(`${target}Prize`).textContent = info.title;
+    $(`${target}Icon`).textContent = info.icon;
+  }
+
+  function launchConfetti() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const layer = $("confetti-layer");
+    const colors = ["#ffffff","#006c35","#16b85d","#d9ad45","#f6d97a"];
+    const count = 110;
+
+    for (let i = 0; i < count; i++) {
+      const piece = document.createElement("span");
+      piece.className = "confetti";
+      piece.style.left = `${Math.random()*100}vw`;
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDuration = `${2.8 + Math.random()*2.7}s`;
+      piece.style.animationDelay = `${Math.random()*0.35}s`;
+      piece.style.setProperty("--drift", `${-90 + Math.random()*180}px`);
+      piece.style.width = `${7 + Math.random()*7}px`;
+      piece.style.height = `${10 + Math.random()*14}px`;
+      layer.appendChild(piece);
+      setTimeout(() => piece.remove(), 6500);
+    }
+  }
+
+  function celebrateOnce() {
+    if (!token) return;
+    try {
+      if (localStorage.getItem(celebrationKey())) return;
+      localStorage.setItem(celebrationKey(), "1");
+    } catch (_) {}
+    $("availableIcon").classList.add("celebrate-pop");
+    launchConfetti();
+  }
+
+  async function loadCoupon() {
+    if (!token || !/^[a-f0-9]{36}$/i.test(token)) {
+      show("invalid");
+      return;
+    }
+
+    try {
+      const storedSecret = localStorage.getItem(claimKey());
+      const claimHash = storedSecret ? await sha256(storedSecret) : null;
+      const data = await rpc("get_coupon", { p_token: token, p_claim_hash: claimHash });
+
+      if (data.state === "available") {
+        renderReward(data.prize, "available");
+        show("available");
+        celebrateOnce();
+        return;
+      }
+
+      if (data.state === "active" && storedSecret) {
+        startActive(data, storedSecret);
+        return;
+      }
+
+      if (data.state === "expired") {
+        localStorage.removeItem(claimKey());
+        show("expired");
+        return;
+      }
+
+      if (data.state === "used") {
+        show("used");
+        return;
+      }
+
+      show("invalid");
+    } catch (error) {
+      console.error(error);
+      show("error");
+    }
+  }
+
+  function openConfirm() {
+    if (!redeeming) $("confirmModal").classList.remove("hidden");
+  }
+
+  function closeConfirm() {
+    if (!redeeming) $("confirmModal").classList.add("hidden");
+  }
+
+  async function redeemCoupon() {
+    if (redeeming) return;
+    redeeming = true;
+    $("confirmBtn").disabled = true;
+    $("cancelBtn").disabled = true;
+    $("confirmBtn").textContent = "جاري التفعيل...";
+
+    const newSecret = randomSecret();
+    try {
+      const claimHash = await sha256(newSecret);
+      const data = await rpc("redeem_coupon", { p_token: token, p_claim_hash: claimHash });
+
+      $("confirmModal").classList.add("hidden");
+
+      if (data.state === "active") {
+        localStorage.setItem(claimKey(), newSecret);
+        startActive(data, newSecret);
+        return;
+      }
+
+      localStorage.removeItem(claimKey());
+      if (data.state === "used") show("used");
+      else if (data.state === "expired") show("expired");
+      else show("invalid");
+    } catch (error) {
+      console.error(error);
+      localStorage.removeItem(claimKey());
+      show("error");
+    } finally {
+      redeeming = false;
+      $("confirmBtn").disabled = false;
+      $("cancelBtn").disabled = false;
+      $("confirmBtn").textContent = "نعم، ابدأ الآن";
+    }
+  }
+
+  function startActive(data, secret) {
+    claimSecret = secret;
+    expiresAt = new Date(data.expires_at).getTime();
+    renderReward(data.prize, "active");
+    show("active");
+
+    clearInterval(timerInterval);
+    clearInterval(codeInterval);
+    updateTimer();
+    updateLiveCode();
+    timerInterval = setInterval(updateTimer, 250);
+    codeInterval = setInterval(updateLiveCode, 1000);
+  }
+
+  function updateTimer() {
+    const remaining = expiresAt - Date.now();
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      clearInterval(codeInterval);
+      localStorage.removeItem(claimKey());
+      show("expired");
+      return;
+    }
+
+    const totalSeconds = Math.ceil(remaining / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    $("timer").textContent = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+  }
+
+  async function updateLiveCode() {
+    if (!claimSecret) return;
+    try {
+      const slot = Math.floor(Date.now() / 7000);
+      const digest = await sha256(`${claimSecret}:${slot}`);
+      const code = String(parseInt(digest.slice(0,8),16) % 10000).padStart(4,"0");
+      $("liveCode").textContent = code;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  $("redeemBtn").addEventListener("click", openConfirm);
+  $("cancelBtn").addEventListener("click", closeConfirm);
+  $("confirmBtn").addEventListener("click", redeemCoupon);
+
+  loadCoupon();
+})();
+</script>
+</body>
+</html>
