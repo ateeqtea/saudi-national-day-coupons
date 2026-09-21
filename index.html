@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>عتيق — هدية اليوم الوطني السعودي</title>
+<style>
+:root{--g:#0b6b3a;--g2:#0f8b4d;--d:#063b22;--c:#fffaf0;--m:#6e7f75}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(145deg,#064328,#0b6b3a 55%,#054025);font-family:Arial,sans-serif;color:#183024;overflow-x:hidden}
+.card{width:min(100%,470px);background:var(--c);border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.2)}
+header{padding:0;text-align:center;background:linear-gradient(160deg,#0b6b3a,#07512d);color:#fff;position:relative}
+.hero{padding:18px 18px 24px}
+.brand{font-weight:900;font-size:20px;margin-top:12px}
+.national{font-size:14px;opacity:.92;margin-top:8px}
+.big-flag{
+  margin:0 auto;
+  width:100%;
+  max-width:400px;
+  min-height:180px;
+  background:linear-gradient(180deg,#0b8b47 0%, #08713b 100%);
+  border:4px solid rgba(255,255,255,.22);
+  border-radius:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12), 0 10px 30px rgba(0,0,0,.18);
+}
+.big-flag .flag-emoji{font-size:68px;line-height:1}
+.big-flag .flag-text{font-size:18px;font-weight:900;letter-spacing:.02em}
+.big-flag .flag-sub{font-size:13px;opacity:.95}
+.content{padding:25px;text-align:center}
+.hidden{display:none!important}
+.eyebrow{font-size:13px;font-weight:800;color:var(--g)}
+h1{font-size:31px;line-height:1.2;margin:10px 0;color:var(--d)}
+.icon{width:126px;height:126px;margin:20px auto 16px;border-radius:28px;display:grid;place-items:center;font-size:62px;background:#eef8f1;border:1px solid #dcebe0}
+.warning{margin:22px 0 15px;padding:15px;background:#fff3cf;border:1px solid #efd384;border-radius:17px;color:#72540b;font-size:14px;line-height:1.75}
+.warning strong{display:block;color:#5f4405}
+.btn{width:100%;border:0;border-radius:16px;padding:16px 18px;background:linear-gradient(135deg,var(--g2),var(--g));color:#fff;font-size:17px;font-weight:900;cursor:pointer}
+.tiny{font-size:12px;color:var(--m);margin-top:12px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#e4f7eb;color:var(--g);font-weight:900;font-size:12px}
+.dot{width:10px;height:10px;border-radius:50%;background:#1fc16b;animation:p 1.3s infinite}
+@keyframes p{50%{opacity:.25}}
+.timer{font-size:54px;font-weight:950;color:var(--g);margin:18px 0 8px;direction:ltr}
+.code{margin-top:18px;background:#073b23;color:white;border-radius:18px;padding:14px}
+.code b{display:block;font-size:31px;letter-spacing:.2em;margin-top:4px;direction:ltr}
+.cashier{margin-top:16px;padding:14px;border:2px dashed rgba(11,107,58,.36);border-radius:15px;color:var(--g);font-weight:850}
+.modal{position:fixed;inset:0;background:rgba(3,25,14,.72);display:grid;place-items:center;padding:20px;z-index:50}
+.modalbox{width:min(100%,410px);background:white;border-radius:24px;padding:24px;text-align:center}
+.modalbox button{margin-top:10px}
+.secondary{background:#edf2ee;color:#183024}
+.status{font-size:68px}
+.spinner{width:42px;height:42px;border:4px solid #dbe6de;border-top-color:var(--g);border-radius:50%;animation:s .9s linear infinite;margin:24px auto}
+@keyframes s{to{transform:rotate(360deg)}}
+
+/* Confetti */
+#confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:100;
+}
+.confetti-piece{
+  position:absolute;
+  top:-20px;
+  width:10px;
+  height:18px;
+  opacity:.95;
+  border-radius:2px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0deg); opacity:1}
+  100%{transform:translateY(115vh) rotate(760deg); opacity:0}
+}
+</style>
+</head>
+<body>
+<div id="confetti"></div>
+
+<main class="card">
+<header>
+  <div class="hero">
+    <div class="big-flag">
+      <div class="flag-emoji">🇸🇦</div>
+      <div class="flag-text">اليوم الوطني السعودي</div>
+      <div class="flag-sub">هدية خاصة من عتيق</div>
+    </div>
+    <div class="brand">عتيق</div>
+    <div class="national">احتفل معنا باليوم الوطني السعودي</div>
+  </div>
+</header>
+
+<section id="loading" class="content">
+  <div class="spinner"></div>
+  <div class="tiny">جاري فتح الهدية...</div>
+</section>
+
+<section id="available" class="content hidden">
+  <div class="eyebrow">🎉 مبروك! لديك هدية</div>
+  <div id="availableIcon" class="icon">🍵</div>
+  <h1 id="availablePrize"></h1>
+
+  <div class="warning">
+    <strong>⚠️ لا تضغط على استبدال إلا عند الكاشير.</strong>
+    بمجرد الضغط على زر الاستبدال يبدأ مؤقت لمدة <b>٥ دقائق</b>، وبعدها تنتهي صلاحية الجائزة ولا يمكن استخدامها مرة أخرى.
+  </div>
+
+  <button id="redeemBtn" class="btn">استبدال — بدء مؤقت ٥ دقائق</button>
+  <div class="tiny">استخدام لمرة واحدة فقط.</div>
+</section>
+
+<section id="active" class="content hidden">
+  <div class="pill"><span class="dot"></span> الجائزة مفعلة الآن</div>
+  <div id="activeIcon" class="icon">🍵</div>
+  <h1 id="activePrize"></h1>
+  <div class="tiny" style="margin-top:20px">الوقت المتبقي</div>
+  <div id="timer" class="timer">05:00</div>
+  <div class="code"><small>رمز متغير تلقائيًا</small><b id="liveCode">----</b></div>
+  <div class="cashier">اعرض هذه الشاشة للكاشير</div>
+</section>
+
+<section id="used" class="content hidden"><div class="status">❌</div><h1>تم استخدام الجائزة مسبقًا</h1></section>
+<section id="expired" class="content hidden"><div class="status">⌛</div><h1>انتهت صلاحية الجائزة</h1></section>
+<section id="invalid" class="content hidden"><div class="status">⚠️</div><h1>رمز غير صالح</h1></section>
+<section id="error" class="content hidden"><div class="status">📶</div><h1>مشكلة في الاتصال</h1><button class="btn secondary" onclick="location.reload()">إعادة المحاولة</button></section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modalbox">
+    <div style="font-size:48px">⏱️</div>
+    <h2>هل أنت عند الكاشير؟</h2>
+    <p>عند المتابعة سيبدأ مؤقت <b>٥ دقائق</b> فورًا، وستُعتبر هذه القسيمة مستخدمة بشكل نهائي.</p>
+    <button id="confirmBtn" class="btn">نعم — ابدأ الآن</button>
+    <button id="cancelBtn" class="btn secondary">ليس الآن</button>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL="https://pbfaiyxqoomhqdkyaiax.supabase.co";
+const ANON_KEY="sb_publishable_MwClFGEYdQ3IAMiVfpVRHA_tdV4Mtg2";
+const token=new URLSearchParams(location.search).get("c");
+const pages=["loading","available","active","used","expired","invalid","error"];
+
+const P={
+  "كوب شاي صغير":{title:"كوب شاي صغير",icon:"🍵"},
+  "كوب قهوة اليوم صغير":{title:"كوب قهوة اليوم صغير",icon:"☕"},
+  "كوب كركديه صغير":{title:"كوب كركديه صغير",icon:"🌺"},
+  "كوب شاهي بارد صغير":{title:"كوب شاهي بارد صغير",icon:"🥤"},
+  "خصم ٢٠٪؜ على اي فطيرة":{title:"خصم ٢٠٪؜ على اي فطيرة",icon:"🥟"}
+};
+
+const $=id=>document.getElementById(id);
+let exp=0,secret=null,t1,t2;
+let confettiShown = false;
+
+function show(id){
+  pages.forEach(x=>$(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  if(id==="available" && !confettiShown){
+    launchConfetti();
+    confettiShown = true;
+  }
+}
+
+function k(){return "ateeq:"+token}
+
+function hx(a){
+  return Array.from(a).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function mk(){
+  let a=new Uint8Array(32);
+  crypto.getRandomValues(a);
+  return hx(a);
+}
+
+async function sha(s){
+  return hx(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s))));
+}
+
+async function rpc(n,b){
+  let r=await fetch(`${SUPABASE_URL}/rest/v1/rpc/${n}`,{
+    method:"POST",
+    headers:{
+      apikey:ANON_KEY,
+      Authorization:"Bearer "+ANON_KEY,
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(b)
+  });
+  if(!r.ok) throw 0;
+  return r.json();
+}
+
+function reward(prize,target){
+  const p=P[prize]||{title:prize,icon:"🎁"};
+  $(target+"Prize").textContent=p.title;
+  $(target+"Icon").textContent=p.icon;
+}
+
+function launchConfetti(){
+  const box = $("confetti");
+  const colors = ["#ffffff","#0b8b47","#18b864","#d4af37","#f7d774"];
+  const total = 90;
+
+  for(let i=0;i<total;i++){
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+    piece.style.left = Math.random()*100 + "vw";
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDuration = (2.8 + Math.random()*2.4) + "s";
+    piece.style.animationDelay = (Math.random()*0.5) + "s";
+    piece.style.transform = `rotate(${Math.random()*360}deg)`;
+    piece.style.width = (8 + Math.random()*6) + "px";
+    piece.style.height = (12 + Math.random()*12) + "px";
+    box.appendChild(piece);
+    setTimeout(()=>piece.remove(), 6000);
+  }
+}
+
+async function load(){
+  if(!token||!/^[a-f0-9]{36}$/i.test(token)) return show("invalid");
+  try{
+    let s=localStorage.getItem(k());
+    let h=s?await sha(s):null;
+    let d=await rpc("get_coupon",{p_token:token,p_claim_hash:h});
+
+    if(d.state==="available"){
+      reward(d.prize,"available");
+      show("available");
+    }else if(d.state==="active"&&s){
+      start(d,s);
+    }else if(d.state==="expired"){
+      localStorage.removeItem(k());
+      show("expired");
+    }else if(d.state==="used"){
+      show("used");
+    }else{
+      show("invalid");
+    }
+  }catch(e){
+    show("error");
+  }
+}
+
+$("redeemBtn").onclick=()=>$("modal").classList.remove("hidden");
+$("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
+
+$("confirmBtn").onclick=async()=>{
+  try{
+    let s=mk();
+    let h=await sha(s);
+    localStorage.setItem(k(),s);
+
+    let d=await rpc("redeem_coupon",{p_token:token,p_claim_hash:h});
+    $("modal").classList.add("hidden");
+
+    if(d.state==="active"){
+      start(d,s);
+    }else if(d.state==="used"){
+      show("used");
+    }else if(d.state==="expired"){
+      show("expired");
+    }else{
+      show("invalid");
+    }
+  }catch(e){
+    localStorage.removeItem(k());
+    show("error");
+  }
+};
+
+function start(d,s){
+  secret=s;
+  exp=new Date(d.expires_at).getTime();
+  reward(d.prize,"active");
+  show("active");
+  tick();
+  code();
+
+  clearInterval(t1);
+  clearInterval(t2);
+
+  t1=setInterval(tick,250);
+  t2=setInterval(code,1000);
+}
+
+function tick(){
+  let r=exp-Date.now();
+
+  if(r<=0){
+    clearInterval(t1);
+    clearInterval(t2);
+    localStorage.removeItem(k());
+    return show("expired");
+  }
+
+  let z=Math.ceil(r/1000);
+  let m=Math.floor(z/60);
+  let s=z%60;
+
+  $("timer").textContent=
+    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+async function code(){
+  if(!secret) return;
+
+  let h=await sha(secret+":"+Math.floor(Date.now()/7000));
+
+  $("liveCode").textContent=
+    String(parseInt(h.slice(0,8),16)%10000).padStart(4,"0");
+}
+
+load();
+</script>
+</body>
+</html>
